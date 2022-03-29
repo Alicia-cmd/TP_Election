@@ -79,7 +79,7 @@ using SafeMath for uint256;
     }
 
     //Récupérer l'identifiant de l'utilisateur
-    function get() public view returns (uint) {
+    function get() public returns (uint) {
         return address;
     }
 
