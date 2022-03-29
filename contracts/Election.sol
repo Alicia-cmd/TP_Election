@@ -4,6 +4,7 @@ pragma solidity ^0.4.12;
 
 import "./Ownable.sol";
 import "./SafeMath.sol";
+import "./Whitelist.sol";
 
 contract Election is Ownable {
 
