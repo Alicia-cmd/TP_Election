@@ -1,4 +1,4 @@
-pragma solidity ^0.6.12;
+pragma solidity ^0.4.12;
 
 import "../OpenZeppelin/Ownable.sol";
 
