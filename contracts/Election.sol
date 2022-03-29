@@ -13,7 +13,8 @@ using SafeMath for uint256;
 
     //differents types de votes possibles
     enum VoteType {VoteCandidat}
-
+    bool public isVotingInSession;
+    
     // Model a Candidate
     struct Candidat{
         address adressCandidat;
@@ -57,22 +58,23 @@ using SafeMath for uint256;
     event TotalvotedEvent ( uint indexed _totalvotesId);
 
     //Ajouter un candidat
-    function addCandidate isCreator(){
-        // modifier pour ne pas ajouter 2 fois un meme candidat
-        if modifier candidatMustNotExistYet(){
-            for (uint i=0; i<candidats.length; i++)
-            {
-                if (candidats[i].adressCandidat == msg.sender) throw;
-                _;
-            }      
+    function addCandidate (string memory _name, address _address) public onlyOwner {
             candidatesCount ++;
             candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
-        }
     }
 
+    // modifier pour ne pas ajouter 2 fois un meme candidat
+    modifier candidatMustNotExistYet(){
+        for (uint i=0; i<candidats.length; i++)
+        {
+            if (candidats[i].adressCandidat == msg.sender) throw;
+            _;
+        }
+    }  
+
     //Supprimer un candidat
-    function removeCandidate isCreator(){
-        suicide(msg.sender)
+    function removeCandidate (string memory _name, address _address) public onlyOwner{
+        suicide(msg.sender);
     }
 
     //Récupérer l'identifiant de l'utilisateur
@@ -81,7 +83,7 @@ using SafeMath for uint256;
     }
 
     
-    function vote (uint _candidateId, uint _totalvotesId) public {
+    function addVote (uint _candidateId, uint _totalvotesId) public {
 
         //Si le temps est toujours compris dans le temps de vote alors on peut voter
         if (block.timestamp <= 1 days){
